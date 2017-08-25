@@ -22,11 +22,17 @@ BLUE = (0, 0, 255)
 
 rectx = 200
 recty = 150
+rectLen = 1
+
+DISPLAYSURF.fill(WHITE)
+pygame.display.update()
 
 direction = 'right'
+dirtyrects = []
 while True:
-    DISPLAYSURF.fill(WHITE)
 
+
+    dirtyrects.append(pygame.draw.rect(DISPLAYSURF, WHITE, (rectx, recty, rectLen * 10, 10)))
     if direction == 'right':
         rectx += 5
         if rectx == 280:
@@ -44,13 +50,14 @@ while True:
         recty -= 5
         if recty == 10:
             direction = 'right'
+            rectLen += 1
 
-    pygame.draw.rect(DISPLAYSURF, )
+    dirtyrects.append(pygame.draw.rect(DISPLAYSURF, RED, (rectx, recty, rectLen*10, 10)))
 
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
-        pygame.display.update()
+    pygame.display.update(dirtyrects)
     fpsClock.tick(FPS)
